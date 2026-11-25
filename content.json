@@ -1,1 +1,13 @@
-{"text":{},"images":{},"fees":{},"contact":{},"announcements":[],"gallery":[]}
+{
+  "text": {},
+  "images": {},
+  "fees": {
+    "admission": 5000,
+    "perSubject": 2000
+  },
+  "contact": {
+    "wa": ""
+  },
+  "announcements": [],
+  "gallery": []
+}
