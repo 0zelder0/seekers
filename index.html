@@ -21,6 +21,15 @@ button,.btn,summary,.gbtn,.step{-webkit-user-select:none;user-select:none}
 body{cursor:default}
 a,button,summary,select,label,.btn,.gbtn,.step{cursor:pointer}
 input,textarea{cursor:text}
+#notices{background:#D5F25B;color:#0F1E19;font-weight:600;font-size:15px;line-height:1.4;text-align:center;padding:10px 16px}
+#notices p{margin:0}
+#notices p+p{margin-top:4px}
+#view-facilities .slot.has-img,#view-home .slot.has-img,#view-curriculum .slot.has-img,#view-fees .slot.has-img{padding:0;min-height:0;overflow:hidden;aspect-ratio:4/3;display:block}
+#view-facilities .slot.has-img img,#view-home .slot.has-img img,#view-curriculum .slot.has-img img,#view-fees .slot.has-img img{display:block;width:100%;height:100%;object-fit:cover}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:32px}
+.gal figure{margin:0}
+.gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#C3D9C9}
+.gal figcaption{margin-top:8px;font-size:15px;color:var(--mut)}
 
 :root{--paper:#F2F5EF;--ink:#0F1E19;--board:#11463A;--board2:#0B2F27;--lime:#D5F25B;--s1:#E0EBE1;--s2:#C3D9C9;--s3:#9DC0AA;--mut:#374B44;--dim:#BFD3C8;--font:'Schibsted Grotesk',system-ui,sans-serif;--ease:cubic-bezier(.2,.9,.2,1)}
 *{box-sizing:border-box}
@@ -339,6 +348,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </style>
 </head>
 <body>
+<div id="notices" role="status" hidden></div>
 <section class="view" id="view-home">
 <div class="page">
 
@@ -368,15 +378,15 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <div class="wrap hero">
 <div class="hero-text">
-<h1 class="d1 rise">Better marks in every subject.</h1>
-<p class="lead rise" style="max-width:560px;animation-delay:90ms">Seekers teaches Grade 4 to O Level in small classes where the teacher knows every student.</p>
+<h1 class="d1 rise" data-k="home.1">Better marks in every subject.</h1>
+<p class="lead rise" style="max-width:560px;animation-delay:90ms" data-k="home.2">Seekers teaches Grade 4 to O Level in small classes where the teacher knows every student.</p>
 <div class="btns rise" style="animation-delay:180ms">
 <a class="btn btn-lime" href="#fees" data-go="fees">Book a trial class</a>
 <a class="tlink" href="#curriculum" data-go="curriculum">How the curriculum works</a>
 </div>
 </div>
 <div class="dialwrap rise" style="animation-delay:120ms">
-<p class="mut">Tap your child's grade</p>
+<p class="mut" data-k="home.3">Tap your child's grade</p>
 <div class="dial">
 <svg viewBox="0 0 400 400" aria-hidden="true">
 <circle cx="200" cy="200" r="198" fill="#0B2F27"></circle>
@@ -408,14 +418,14 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <section class="sec">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">Does this sound like your child?</h2>
-<p class="lead mut">Parents tell us this a lot. In a small class the teacher notices early, and we tell you early too.</p>
+<h2 class="d2" data-k="home.4">Does this sound like your child?</h2>
+<p class="lead mut" data-k="home.5">Parents tell us this a lot. In a small class the teacher notices early, and we tell you early too.</p>
 </div>
 <div class="rows">
-<div class="rowp"><p class="stmt">Follows in class, but forgets by the exam.</p><p class="mut">We give every topic organised notes, practice sheets and past papers, so revision builds up all term instead of landing on the last night.</p></div>
-<div class="rowp"><p class="stmt">Is shy about asking the teacher for help.</p><p class="mut">Small batches and doubt-clearing time mean questions get asked and answered, including the ones that only come up later.</p></div>
-<div class="rowp"><p class="stmt">Does well in some subjects and falls behind in others.</p><p class="mut">We teach every subject at every level, and send regular progress updates, so a slipping subject is spotted early.</p></div>
-<div class="rowp"><p class="stmt">Has plenty of homework and no plan for it.</p><p class="mut">Clear routines at class and organised material give homework a plan, with fewer reminders and fewer tears at home.</p></div>
+<div class="rowp"><p class="stmt" data-k="home.6">Follows in class, but forgets by the exam.</p><p class="mut" data-k="home.7">We give every topic organised notes, practice sheets and past papers, so revision builds up all term instead of landing on the last night.</p></div>
+<div class="rowp"><p class="stmt" data-k="home.8">Is shy about asking the teacher for help.</p><p class="mut" data-k="home.9">Small batches and doubt-clearing time mean questions get asked and answered, including the ones that only come up later.</p></div>
+<div class="rowp"><p class="stmt" data-k="home.10">Does well in some subjects and falls behind in others.</p><p class="mut" data-k="home.11">We teach every subject at every level, and send regular progress updates, so a slipping subject is spotted early.</p></div>
+<div class="rowp"><p class="stmt" data-k="home.12">Has plenty of homework and no plan for it.</p><p class="mut" data-k="home.13">Clear routines at class and organised material give homework a plan, with fewer reminders and fewer tears at home.</p></div>
 </div>
 </div>
 </section>
@@ -423,23 +433,23 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <section class="sec f-s1">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">Grade 4 to O Level, every subject</h2>
-<p class="lead mut">Your child can stay with us as they move up. We teach all subjects at every level.</p>
+<h2 class="d2" data-k="home.14">Grade 4 to O Level, every subject</h2>
+<p class="lead mut" data-k="home.15">Your child can stay with us as they move up. We teach all subjects at every level.</p>
 </div>
 <div class="stair">
-<div style="background:#C3D9C9;min-height:300px"><h3 class="d3">Grade 4 and 5</h3><p>Reading, writing and basic maths. We make sure the basics are solid before the harder work starts.</p></div>
-<div style="background:#9DC0AA;min-height:380px"><h3 class="d3">Grade 6 to 8</h3><p>Subjects get harder and the homework grows. This is where many students start to slip, so we check progress often.</p></div>
-<div style="background:#6FA98F;min-height:460px"><h3 class="d3">Grade 9 and 10</h3><p>Students begin the O Level topics early and practise with past papers, so they are not rushing later.</p></div>
-<div style="background:#11463A;color:#F2F5EF;min-height:540px"><h3 class="d3">O Level</h3><p>Revision, timed past papers and mock exams. We set aside extra time for the topics each student finds hard.</p></div>
+<div style="background:#C3D9C9;min-height:300px"><h3 class="d3" data-k="home.16">Grade 4 and 5</h3><p data-k="home.17">Reading, writing and basic maths. We make sure the basics are solid before the harder work starts.</p></div>
+<div style="background:#9DC0AA;min-height:380px"><h3 class="d3" data-k="home.18">Grade 6 to 8</h3><p data-k="home.19">Subjects get harder and the homework grows. This is where many students start to slip, so we check progress often.</p></div>
+<div style="background:#6FA98F;min-height:460px"><h3 class="d3" data-k="home.20">Grade 9 and 10</h3><p data-k="home.21">Students begin the O Level topics early and practise with past papers, so they are not rushing later.</p></div>
+<div style="background:#11463A;color:#F2F5EF;min-height:540px"><h3 class="d3" data-k="home.22">O Level</h3><p data-k="home.23">Revision, timed past papers and mock exams. We set aside extra time for the topics each student finds hard.</p></div>
 </div>
 </div>
 </section>
 
 <section class="sec f-lime">
 <div class="wrap two" style="align-items:center">
-<h2 class="d2">New to the English medium?</h2>
+<h2 class="d2" data-k="home.24">New to the English medium?</h2>
 <div style="display:flex;flex-direction:column;gap:32px;align-items:flex-start">
-<p class="lead">If you studied in the Bangla medium, O Level, exam boards and grades can feel unfamiliar. We explain how it all works, step by step.</p>
+<p class="lead" data-k="home.25">If you studied in the Bangla medium, O Level, exam boards and grades can feel unfamiliar. We explain how it all works, step by step.</p>
 <a class="btn btn-board" href="#curriculum" data-go="curriculum">How the curriculum works <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
 </div>
 </div>
@@ -448,16 +458,16 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <section class="sec on-dark">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">A place children want to come back to</h2>
-<p class="lead mut">Good teaching needs a good setting. This is what your child gets every time they walk in.</p>
+<h2 class="d2" data-k="home.26">A place children want to come back to</h2>
+<p class="lead mut" data-k="home.27">Good teaching needs a good setting. This is what your child gets every time they walk in.</p>
 </div>
 <div class="g3t">
-<div><h3 class="d3">Small batches</h3><p class="mut">Teachers can follow each child's work, so no one gets lost at the back of the room.</p></div>
-<div><h3 class="d3">Bright, comfortable classrooms</h3><p class="mut">Well-lit rooms with proper desks and boards, set up so children can focus.</p></div>
-<div><h3 class="d3">Doubt-clearing time</h3><p class="mut">Extra time with the teacher to untangle whatever did not make sense in class.</p></div>
-<div><h3 class="d3">Notes and practice sheets</h3><p class="mut">Organised material for every topic, so revision is never a last-night scramble.</p></div>
-<div><h3 class="d3">Regular parent updates</h3><p class="mut">Short updates on attendance, results and what to work on next, so you are never guessing.</p></div>
-<div><h3 class="d3">A safe, supervised space</h3><p class="mut">Children are looked after from the moment they arrive until they are picked up.</p></div>
+<div><h3 class="d3" data-k="home.28">Small batches</h3><p class="mut" data-k="home.29">Teachers can follow each child's work, so no one gets lost at the back of the room.</p></div>
+<div><h3 class="d3" data-k="home.30">Bright, comfortable classrooms</h3><p class="mut" data-k="home.31">Well-lit rooms with proper desks and boards, set up so children can focus.</p></div>
+<div><h3 class="d3" data-k="home.32">Doubt-clearing time</h3><p class="mut" data-k="home.33">Extra time with the teacher to untangle whatever did not make sense in class.</p></div>
+<div><h3 class="d3" data-k="home.34">Notes and practice sheets</h3><p class="mut" data-k="home.35">Organised material for every topic, so revision is never a last-night scramble.</p></div>
+<div><h3 class="d3" data-k="home.36">Regular parent updates</h3><p class="mut" data-k="home.37">Short updates on attendance, results and what to work on next, so you are never guessing.</p></div>
+<div><h3 class="d3" data-k="home.38">A safe, supervised space</h3><p class="mut" data-k="home.39">Children are looked after from the moment they arrive until they are picked up.</p></div>
 </div>
 <div style="margin-top:clamp(40px,5vw,72px)"><a class="btn btn-lime" href="#facilities" data-go="facilities">See all our facilities <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a></div>
 </div>
@@ -465,7 +475,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <section class="sec">
 <div class="wrap two">
-<h2 class="d2">What parents notice first</h2>
+<h2 class="d2" data-k="home.40">What parents notice first</h2>
 <div style="display:flex;flex-direction:column;gap:40px">
 <p class="stmt">Questions instead of silence. <span class="mut" style="font-weight:400;font-size:18px;letter-spacing:0;display:block;margin-top:6px">Children who used to stay quiet in class start asking how and why.</span></p>
 <p class="stmt">Homework without the daily fight. <span class="mut" style="font-weight:400;font-size:18px;letter-spacing:0;display:block;margin-top:6px">Clear routines at class mean fewer reminders and fewer tears at home.</span></p>
@@ -476,11 +486,11 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <section class="sec f-s1" style="padding-top:clamp(64px,8vw,112px)">
 <div class="wrap">
-<h2 class="d2" style="max-width:900px">What parents say about Seekers</h2>
+<h2 class="d2" style="max-width:900px" data-k="home.41">What parents say about Seekers</h2>
 <div class="qgrid">
-<div class="q big"><p>[Add a parent's own words here]</p><p class="mut" style="font-size:18px">[Parent's name, child's grade]</p></div>
-<div class="q"><p>[Add a parent's own words here]</p><p class="mut" style="font-size:18px">[Parent's name, child's grade]</p></div>
-<div class="q"><p>[Add a parent's own words here]</p><p class="mut" style="font-size:18px">[Parent's name, child's grade]</p></div>
+<div class="q big"><p data-k="home.42">[Add a parent's own words here]</p><p class="mut" style="font-size:18px" data-k="home.43">[Parent's name, child's grade]</p></div>
+<div class="q"><p data-k="home.44">[Add a parent's own words here]</p><p class="mut" style="font-size:18px" data-k="home.45">[Parent's name, child's grade]</p></div>
+<div class="q"><p data-k="home.46">[Add a parent's own words here]</p><p class="mut" style="font-size:18px" data-k="home.47">[Parent's name, child's grade]</p></div>
 </div>
 </div>
 </section>
@@ -489,8 +499,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <div class="wrap">
 <div class="two" style="padding-top:clamp(64px,9vw,128px);align-items:end">
 <div style="display:flex;flex-direction:column;gap:20px">
-<h2 class="d2">Come and see a class</h2>
-<p class="lead mut" style="max-width:520px">Bring your child to a class. The trial class is free, and you can ask the teachers anything.</p>
+<h2 class="d2" data-k="home.48">Come and see a class</h2>
+<p class="lead mut" style="max-width:520px" data-k="home.49">Bring your child to a class. The trial class is free, and you can ask the teachers anything.</p>
 </div>
 <div class="btns">
 <a class="btn btn-lime" href="#fees" data-go="fees">Join Seekers</a>
@@ -499,9 +509,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 <div class="foot-top">
 <nav aria-label="Footer"><a href="#home" data-go="home">Home</a><a href="#curriculum" data-go="curriculum">Curriculum</a><a href="#facilities" data-go="facilities">Facilities</a><a href="#fees" data-go="fees">Fees and joining</a></nav>
-<p class="mut">Teaching Grade 4 to O Level. © 2026 Seekers</p>
+<p class="mut" data-k="home.50">Teaching Grade 4 to O Level. © 2026 Seekers</p>
 </div>
-<p class="mark" aria-hidden="true">Seekers</p>
+<p class="mark" aria-hidden="true" data-k="home.51">Seekers</p>
 </div>
 </footer>
 
@@ -534,23 +544,23 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 </header>
 <div class="wrap pagehead">
-<h1 class="d2 rise" style="max-width:1000px">How the English medium curriculum works</h1>
-<p class="lead mut rise" style="max-width:640px;animation-delay:90ms">If you studied in the Bangla medium, the English medium can look unfamiliar. Here is how it works, in plain words.</p>
+<h1 class="d2 rise" style="max-width:1000px" data-k="curriculum.1">How the English medium curriculum works</h1>
+<p class="lead mut rise" style="max-width:640px;animation-delay:90ms" data-k="curriculum.2">If you studied in the Bangla medium, the English medium can look unfamiliar. Here is how it works, in plain words.</p>
 </div>
 </div>
 
 <section class="sec">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">From primary years to university</h2>
-<p class="lead mut">There are five steps. The exams that matter most come at the end of O Level and at the end of A Level. Schools can differ slightly in timing.</p>
+<h2 class="d2" data-k="curriculum.3">From primary years to university</h2>
+<p class="lead mut" data-k="curriculum.4">There are five steps. The exams that matter most come at the end of O Level and at the end of A Level. Schools can differ slightly in timing.</p>
 </div>
 <ol class="path">
-<li class="prow"><div><h3 class="d3">Primary years</h3><p class="sub">Up to Grade 5</p></div><p>Children learn to read well, write clearly and handle basic maths. Their own school sets most of the tests.</p><p><strong>Seekers teaches this</strong></p></li>
-<li class="prow"><div><h3 class="d3">Lower secondary</h3><p class="sub">Grade 6 to 8</p></div><p>Subjects get harder and the homework grows. Students get ready for the exam courses ahead.</p><p><strong>Seekers teaches this</strong></p></li>
-<li class="prow" style="background:#11463A;color:#F2F5EF"><div><h3 class="d3">O Level or IGCSE</h3><p class="sub" style="color:#BFD3C8">Usually Grade 9 and 10</p></div><p>A two year course in each subject. It ends with exams set by a UK exam board.</p><p><strong>Seekers teaches this</strong></p></li>
-<li class="prow no"><div><h3 class="d3">A Level</h3><p class="sub">Two more years</p></div><p>Fewer subjects, studied in more depth. It ends with exams from the same boards.</p><p></p></li>
-<li class="prow no"><div><h3 class="d3">University</h3><p class="sub">In Bangladesh or abroad</p></div><p>Dhaka University treats O Level as equal to SSC and A Level as equal to HSC when it reviews an application.</p><p></p></li>
+<li class="prow"><div><h3 class="d3" data-k="curriculum.5">Primary years</h3><p class="sub" data-k="curriculum.6">Up to Grade 5</p></div><p data-k="curriculum.7">Children learn to read well, write clearly and handle basic maths. Their own school sets most of the tests.</p><p><strong>Seekers teaches this</strong></p></li>
+<li class="prow"><div><h3 class="d3" data-k="curriculum.8">Lower secondary</h3><p class="sub" data-k="curriculum.9">Grade 6 to 8</p></div><p data-k="curriculum.10">Subjects get harder and the homework grows. Students get ready for the exam courses ahead.</p><p><strong>Seekers teaches this</strong></p></li>
+<li class="prow" style="background:#11463A;color:#F2F5EF"><div><h3 class="d3" data-k="curriculum.11">O Level or IGCSE</h3><p class="sub" style="color:#BFD3C8" data-k="curriculum.12">Usually Grade 9 and 10</p></div><p data-k="curriculum.13">A two year course in each subject. It ends with exams set by a UK exam board.</p><p><strong>Seekers teaches this</strong></p></li>
+<li class="prow no"><div><h3 class="d3" data-k="curriculum.14">A Level</h3><p class="sub" data-k="curriculum.15">Two more years</p></div><p data-k="curriculum.16">Fewer subjects, studied in more depth. It ends with exams from the same boards.</p><p></p></li>
+<li class="prow no"><div><h3 class="d3" data-k="curriculum.17">University</h3><p class="sub" data-k="curriculum.18">In Bangladesh or abroad</p></div><p data-k="curriculum.19">Dhaka University treats O Level as equal to SSC and A Level as equal to HSC when it reviews an application.</p><p></p></li>
 </ol>
 </div>
 </section>
@@ -558,15 +568,15 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <section class="sec on-dark">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">Who sets the exams</h2>
-<p class="lead mut">In the Bangla medium, the Bangladesh education boards set SSC and HSC. In the English medium, the exams come from UK exam boards instead. Two are common in Bangladesh.</p>
+<h2 class="d2" data-k="curriculum.20">Who sets the exams</h2>
+<p class="lead mut" data-k="curriculum.21">In the Bangla medium, the Bangladesh education boards set SSC and HSC. In the English medium, the exams come from UK exam boards instead. Two are common in Bangladesh.</p>
 </div>
 <div class="boards">
-<div><h3 class="d2">Cambridge</h3><p class="lead mut">Cambridge O Level, Cambridge IGCSE, and Cambridge International AS and A Level.</p></div>
-<div><h3 class="d2">Pearson Edexcel</h3><p class="lead mut">Pearson Edexcel International GCSE, and Pearson Edexcel International A Level.</p></div>
+<div><h3 class="d2" data-k="curriculum.22">Cambridge</h3><p class="lead mut" data-k="curriculum.23">Cambridge O Level, Cambridge IGCSE, and Cambridge International AS and A Level.</p></div>
+<div><h3 class="d2" data-k="curriculum.24">Pearson Edexcel</h3><p class="lead mut" data-k="curriculum.25">Pearson Edexcel International GCSE, and Pearson Edexcel International A Level.</p></div>
 </div>
 <div class="two" style="margin-top:clamp(40px,5vw,72px)">
-<p class="mut">The exams are held in Bangladesh through the British Council. Students in many other countries sit the same papers. Your child's school chooses the board.</p>
+<p class="mut" data-k="curriculum.26">The exams are held in Bangladesh through the British Council. Students in many other countries sit the same papers. Your child's school chooses the board.</p>
 <p><strong>Seekers teaches both Cambridge and Pearson Edexcel.</strong> Tell us which board your child's school uses and we prepare them for that one.</p>
 </div>
 </div>
@@ -574,19 +584,19 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <section class="sec">
 <div class="wrap two">
-<h2 class="d2">How O Level works</h2>
+<h2 class="d2" data-k="curriculum.27">How O Level works</h2>
 <div class="stack">
-<div><h3 class="d3">Your child chooses subjects</h3><p class="mut">Cambridge lists more than 40 O Level subjects. Pearson Edexcel has its own list of International GCSE subjects, taken at the same stage as O Level. Students can combine subjects in any way, and the school decides which ones it offers.</p></div>
-<div><h3 class="d3">The exams come at the end</h3><p class="mut">The result comes from exams at the end of the course. Depending on the subject, they can include written, spoken and practical parts.</p></div>
-<div><h3 class="d3">Two exam sessions a year</h3><p class="mut">Cambridge holds exams in June and November. Pearson Edexcel holds them in May or June and in November. For both boards, results come out in August and January.</p></div>
-<div><h3 class="d3">A grade for each subject</h3><p class="mut">Cambridge O Level grades run from A* at the top down to E. Edexcel International GCSE uses numbers from 9 at the top down to 1. There is no single GPA out of 5.00 for all subjects together.</p></div>
+<div><h3 class="d3" data-k="curriculum.28">Your child chooses subjects</h3><p class="mut" data-k="curriculum.29">Cambridge lists more than 40 O Level subjects. Pearson Edexcel has its own list of International GCSE subjects, taken at the same stage as O Level. Students can combine subjects in any way, and the school decides which ones it offers.</p></div>
+<div><h3 class="d3" data-k="curriculum.30">The exams come at the end</h3><p class="mut" data-k="curriculum.31">The result comes from exams at the end of the course. Depending on the subject, they can include written, spoken and practical parts.</p></div>
+<div><h3 class="d3" data-k="curriculum.32">Two exam sessions a year</h3><p class="mut" data-k="curriculum.33">Cambridge holds exams in June and November. Pearson Edexcel holds them in May or June and in November. For both boards, results come out in August and January.</p></div>
+<div><h3 class="d3" data-k="curriculum.34">A grade for each subject</h3><p class="mut" data-k="curriculum.35">Cambridge O Level grades run from A* at the top down to E. Edexcel International GCSE uses numbers from 9 at the top down to 1. There is no single GPA out of 5.00 for all subjects together.</p></div>
 </div>
 </div>
 </section>
 
 <section class="sec f-s1">
 <div class="wrap">
-<h2 class="d2" style="max-width:900px">Bangla medium and English medium</h2>
+<h2 class="d2" style="max-width:900px" data-k="curriculum.36">Bangla medium and English medium</h2>
 <div class="tablewrap">
 <table>
 <thead><tr><th scope="col"><span class="sr">Topic</span></th><th scope="col">Bangla medium</th><th scope="col">English medium</th></tr></thead>
@@ -605,17 +615,17 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <section class="sec">
 <div class="wrap two">
-<h2 class="d2">Quick answers</h2>
+<h2 class="d2" data-k="curriculum.37">Quick answers</h2>
 <div>
 <div class="faq">
-<details class="q" open=""><summary>Is O Level the same as SSC?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>They come at the same point in school. Dhaka University treats O Level as equal to SSC and A Level as equal to HSC. Each university sets its own rules and they change, so check the notice for the year your child applies.</p></details>
-<details class="q"><summary>How many subjects does my child take?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>The school decides. For Dhaka University, the rules we checked ask for at least five O Level subjects, including Mathematics. Other universities can ask for different things.</p></details>
-<details class="q"><summary>What is a past paper?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>A real exam paper from an earlier year. Students practise with past papers so the style of the exam feels familiar on the day.</p></details>
-<details class="q"><summary>What is a mock exam?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>A practice exam under real exam conditions, held before the real one. It shows what to fix while there is still time.</p></details>
-<details class="q"><summary>Can my child move from the Bangla medium?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>Talk to us. We check where your child is in each subject, then tell you what needs work and how long it may take.</p></details>
-<details class="q"><summary>Which subjects does Seekers teach?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p>All of them, from Grade 4 to O Level.</p></details>
+<details class="q" open=""><summary>Is O Level the same as SSC?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.38">They come at the same point in school. Dhaka University treats O Level as equal to SSC and A Level as equal to HSC. Each university sets its own rules and they change, so check the notice for the year your child applies.</p></details>
+<details class="q"><summary>How many subjects does my child take?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.39">The school decides. For Dhaka University, the rules we checked ask for at least five O Level subjects, including Mathematics. Other universities can ask for different things.</p></details>
+<details class="q"><summary>What is a past paper?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.40">A real exam paper from an earlier year. Students practise with past papers so the style of the exam feels familiar on the day.</p></details>
+<details class="q"><summary>What is a mock exam?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.41">A practice exam under real exam conditions, held before the real one. It shows what to fix while there is still time.</p></details>
+<details class="q"><summary>Can my child move from the Bangla medium?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.42">Talk to us. We check where your child is in each subject, then tell you what needs work and how long it may take.</p></details>
+<details class="q"><summary>Which subjects does Seekers teach?<svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary><p data-k="curriculum.43">All of them, from Grade 4 to O Level.</p></details>
 </div>
-<p class="note mut">Exam boards and universities change their rules from time to time. Please check their latest notices before you decide. We checked the facts on this page in November 2026.</p>
+<p class="note mut" data-k="curriculum.44">Exam boards and universities change their rules from time to time. Please check their latest notices before you decide. We checked the facts on this page in November 2026.</p>
 </div>
 </div>
 </section>
@@ -624,8 +634,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <div class="wrap">
 <div class="two" style="padding-top:clamp(64px,9vw,128px);align-items:end">
 <div style="display:flex;flex-direction:column;gap:20px">
-<h2 class="d2">Still have a question?</h2>
-<p class="lead mut" style="max-width:520px">Ask us. We are happy to explain any part of this in person or on the phone.</p>
+<h2 class="d2" data-k="curriculum.45">Still have a question?</h2>
+<p class="lead mut" style="max-width:520px" data-k="curriculum.46">Ask us. We are happy to explain any part of this in person or on the phone.</p>
 </div>
 <div class="btns">
 <a class="btn btn-lime" target="_blank" rel="noopener" href="https://wa.me/YOURNUMBER?text=Hello%20Seekers%2C%20I%20have%20a%20question%20about%20the%20curriculum."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"></path></svg>Message us on WhatsApp</a>
@@ -634,9 +644,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 <div class="foot-top">
 <nav aria-label="Footer"><a href="#home" data-go="home">Home</a><a href="#curriculum" data-go="curriculum">Curriculum</a><a href="#facilities" data-go="facilities">Facilities</a><a href="#fees" data-go="fees">Fees and joining</a></nav>
-<p class="mut">Teaching Grade 4 to O Level. © 2026 Seekers</p>
+<p class="mut" data-k="curriculum.47">Teaching Grade 4 to O Level. © 2026 Seekers</p>
 </div>
-<p class="mark" aria-hidden="true">Seekers</p>
+<p class="mark" aria-hidden="true" data-k="curriculum.48">Seekers</p>
 </div>
 </footer>
 
@@ -669,8 +679,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 </header>
 <div class="wrap pagehead">
-<h1 class="d2 rise" style="max-width:1000px">Where your child will learn</h1>
-<p class="lead mut rise" style="max-width:640px;animation-delay:90ms">A closer look at the rooms, the support and the daily care your child gets at Seekers.</p>
+<h1 class="d2 rise" style="max-width:1000px" data-k="facilities.1">Where your child will learn</h1>
+<p class="lead mut rise" style="max-width:640px;animation-delay:90ms" data-k="facilities.2">A closer look at the rooms, the support and the daily care your child gets at Seekers.</p>
 </div>
 </div>
 
@@ -678,68 +688,75 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <div class="wrap splits">
 
 <div class="split">
-<div class="slot">[Add a photo of a class in session]</div>
+<div class="slot" data-img="facilities.img1">[Add a photo of a class in session]</div>
 <div class="txt">
-<h2 class="d2s">Small batches</h2>
-<p class="lead mut">We keep batches small. The teacher can check each child's notebook, hear each child's answer and spot a problem the same day.</p>
-<p><span class="fill">[Add your maximum number of students per batch]</span></p>
+<h2 class="d2s" data-k="facilities.3">Small batches</h2>
+<p class="lead mut" data-k="facilities.4">We keep batches small. The teacher can check each child's notebook, hear each child's answer and spot a problem the same day.</p>
+<p><span class="fill" data-k="facilities.5">[Add your maximum number of students per batch]</span></p>
 </div>
 </div>
 
 <div class="split rev">
-<div class="slot">[Add a photo of your classroom]</div>
+<div class="slot" data-img="facilities.img2">[Add a photo of your classroom]</div>
 <div class="txt">
-<h2 class="d2s">Bright, comfortable classrooms</h2>
-<p class="lead mut">Good light, proper desks and a board every student can see. A child who is comfortable can think about the lesson.</p>
-<p><span class="fill">[Add what else the rooms have, such as fans, air conditioning or a projector]</span></p>
+<h2 class="d2s" data-k="facilities.6">Bright, comfortable classrooms</h2>
+<p class="lead mut" data-k="facilities.7">Good light, proper desks and a board every student can see. A child who is comfortable can think about the lesson.</p>
+<p><span class="fill" data-k="facilities.8">[Add what else the rooms have, such as fans, air conditioning or a projector]</span></p>
 </div>
 </div>
 
 <div class="split">
-<div class="slot">[Add a photo of a teacher helping a student]</div>
+<div class="slot" data-img="facilities.img3">[Add a photo of a teacher helping a student]</div>
 <div class="txt">
-<h2 class="d2s">Doubt-clearing time</h2>
-<p class="lead mut">Some questions only come up after class, or while a child is doing homework. This is time with the teacher for exactly that.</p>
-<p><span class="fill">[Add when doubt sessions run]</span></p>
+<h2 class="d2s" data-k="facilities.9">Doubt-clearing time</h2>
+<p class="lead mut" data-k="facilities.10">Some questions only come up after class, or while a child is doing homework. This is time with the teacher for exactly that.</p>
+<p><span class="fill" data-k="facilities.11">[Add when doubt sessions run]</span></p>
 </div>
 </div>
 
 <div class="split rev">
 <div class="slot" style="background:#C3D9C9"><div class="sheet" aria-hidden="true"><i style="height:18px;width:62%;background:#0F1E19"></i><i style="width:100%"></i><i style="width:92%"></i><i style="width:97%"></i><i style="width:70%"></i><i style="width:100%;margin-top:10px"></i><i style="width:88%"></i><i style="width:40%;height:28px;background:#D5F25B;margin-top:auto"></i></div></div>
 <div class="txt">
-<h2 class="d2s">Notes and practice sheets</h2>
-<p class="lead mut">Every topic comes with organised notes and practice sheets. For O Level, students also work through past papers, so revision does not turn into a last-night scramble.</p>
-<p><span class="fill">[Add whether materials are printed, shared online, or both]</span></p>
+<h2 class="d2s" data-k="facilities.12">Notes and practice sheets</h2>
+<p class="lead mut" data-k="facilities.13">Every topic comes with organised notes and practice sheets. For O Level, students also work through past papers, so revision does not turn into a last-night scramble.</p>
+<p><span class="fill" data-k="facilities.14">[Add whether materials are printed, shared online, or both]</span></p>
 </div>
 </div>
 
 <div class="split">
-<div class="slot" style="background:#C3D9C9"><div class="msg"><b>Sample update</b><p>Attended every class this week. The fractions test is marked. Next, we will practise word problems.</p></div></div>
+<div class="slot" style="background:#C3D9C9"><div class="msg"><b>Sample update</b><p data-k="facilities.15">Attended every class this week. The fractions test is marked. Next, we will practise word problems.</p></div></div>
 <div class="txt">
-<h2 class="d2s">Regular parent updates</h2>
-<p class="lead mut">You hear from us about attendance, test results and what your child should work on next, so you are never guessing.</p>
-<p><span class="fill">[Add how you send updates, such as WhatsApp, phone calls or a printed report]</span></p>
+<h2 class="d2s" data-k="facilities.16">Regular parent updates</h2>
+<p class="lead mut" data-k="facilities.17">You hear from us about attendance, test results and what your child should work on next, so you are never guessing.</p>
+<p><span class="fill" data-k="facilities.18">[Add how you send updates, such as WhatsApp, phone calls or a printed report]</span></p>
 </div>
 </div>
 
 <div class="split rev">
-<div class="slot">[Add a photo of the building or entrance]</div>
+<div class="slot" data-img="facilities.img4">[Add a photo of the building or entrance]</div>
 <div class="txt">
-<h2 class="d2s">A safe, supervised space</h2>
-<p class="lead mut">Children are looked after from the moment they arrive until they are picked up.</p>
-<p><span class="fill">[Add details such as CCTV, a waiting area for parents or pick up rules]</span></p>
+<h2 class="d2s" data-k="facilities.19">A safe, supervised space</h2>
+<p class="lead mut" data-k="facilities.20">Children are looked after from the moment they arrive until they are picked up.</p>
+<p><span class="fill" data-k="facilities.21">[Add details such as CCTV, a waiting area for parents or pick up rules]</span></p>
 </div>
 </div>
 
 </div>
 </section>
 
+<section class="sec" id="gallery" hidden>
+<div class="wrap">
+<h2 class="d2s" data-k="facilities.22">Photo gallery</h2>
+<p class="lead mut" data-k="facilities.23">A look inside Seekers.</p>
+<div class="gal" id="gallery-grid"></div>
+</div>
+</section>
 <footer class="on-dark">
 <div class="wrap">
 <div class="two" style="padding-top:clamp(64px,9vw,128px);align-items:end">
 <div style="display:flex;flex-direction:column;gap:20px">
-<h2 class="d2">See the rooms in person</h2>
-<p class="lead mut" style="max-width:520px">Photos help, but a visit tells you more. Bring your child along and look around.</p>
+<h2 class="d2" data-k="facilities.24">See the rooms in person</h2>
+<p class="lead mut" style="max-width:520px" data-k="facilities.25">Photos help, but a visit tells you more. Bring your child along and look around.</p>
 </div>
 <div class="btns">
 <a class="btn btn-lime" target="_blank" rel="noopener" href="https://wa.me/YOURNUMBER?text=Hello%20Seekers%2C%20I%20would%20like%20to%20visit%20and%20see%20a%20class."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"></path></svg>Message us on WhatsApp</a>
@@ -748,9 +765,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 <div class="foot-top">
 <nav aria-label="Footer"><a href="#home" data-go="home">Home</a><a href="#curriculum" data-go="curriculum">Curriculum</a><a href="#facilities" data-go="facilities">Facilities</a><a href="#fees" data-go="fees">Fees and joining</a></nav>
-<p class="mut">Teaching Grade 4 to O Level. © 2026 Seekers</p>
+<p class="mut" data-k="facilities.26">Teaching Grade 4 to O Level. © 2026 Seekers</p>
 </div>
-<p class="mark" aria-hidden="true">Seekers</p>
+<p class="mark" aria-hidden="true" data-k="facilities.27">Seekers</p>
 </div>
 </footer>
 
@@ -783,26 +800,26 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 </header>
 <div class="wrap pagehead">
-<h1 class="d1 rise">Fees and joining</h1>
-<p class="lead mut rise" style="max-width:640px;animation-delay:90ms">What it costs, how to start, and how to reach us.</p>
+<h1 class="d1 rise" data-k="fees.1">Fees and joining</h1>
+<p class="lead mut rise" style="max-width:640px;animation-delay:90ms" data-k="fees.2">What it costs, how to start, and how to reach us.</p>
 </div>
 </div>
 
 <section class="sec">
 <div class="wrap">
 <div class="two">
-<h2 class="d2">What it costs</h2>
-<p class="lead mut">You pay admission once. After that you pay only for the subjects your child takes.</p>
+<h2 class="d2" data-k="fees.3">What it costs</h2>
+<p class="lead mut" data-k="fees.4">You pay admission once. After that you pay only for the subjects your child takes.</p>
 </div>
 <div class="two" style="margin-top:clamp(48px,6vw,88px);align-items:stretch">
 <div class="prices">
-<div><p class="v">10,000 BDT</p><p class="mut">Admission, paid once</p></div>
-<div><p class="v">4,000 BDT</p><p class="mut">Each subject, every month</p></div>
+<div><p class="v"><span id="fee-admission">10,000</span> BDT</p><p class="mut" data-k="fees.5">Admission, paid once</p></div>
+<div><p class="v"><span id="fee-subject">4,000</span> BDT</p><p class="mut" data-k="fees.6">Each subject, every month</p></div>
 </div>
 <div class="calc">
-<h3 class="d3">Work out your cost</h3>
+<h3 class="d3" data-k="fees.7">Work out your cost</h3>
 <div>
-<p class="mut" style="font-weight:600">How many subjects does your child need?</p>
+<p class="mut" style="font-weight:600" data-k="fees.8">How many subjects does your child need?</p>
 <div class="stepper">
 <button type="button" class="step" id="calc-minus" aria-label="One subject fewer">−</button>
 <div class="cnt" aria-live="polite"><p id="calc-count">3</p><p class="mut" style="font-size:16px" id="calc-word">subjects</p></div>
@@ -810,8 +827,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 </div>
 </div>
 <div style="display:flex;flex-direction:column;gap:20px">
-<div class="res"><p class="mut" style="font-weight:600">First month, with admission</p><p><span id="calc-first">22,000</span> BDT</p></div>
-<div class="res"><p class="mut" style="font-weight:600">Every month after</p><p><span id="calc-monthly">12,000</span> BDT</p></div>
+<div class="res"><p class="mut" style="font-weight:600" data-k="fees.9">First month, with admission</p><p><span id="calc-first">22,000</span> BDT</p></div>
+<div class="res"><p class="mut" style="font-weight:600" data-k="fees.10">Every month after</p><p><span id="calc-monthly">12,000</span> BDT</p></div>
 </div>
 </div>
 </div>
@@ -820,11 +837,11 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 
 <section class="sec f-s1">
 <div class="wrap two">
-<h2 class="d2">Three steps to join</h2>
+<h2 class="d2" data-k="fees.11">Three steps to join</h2>
 <ol class="stack">
-<li><h3 class="d3">Call or visit us</h3><p class="mut">Tell us your child's grade and which subjects they need. Ask us anything.</p></li>
-<li><h3 class="d3">Meet the teachers</h3><p class="mut">We check where your child is in each subject and place them in the right batch.</p></li>
-<li><h3 class="d3">Start classes</h3><p class="mut">Pay admission and the first month's fees. Your child gets a timetable and study material.</p></li>
+<li><h3 class="d3" data-k="fees.12">Call or visit us</h3><p class="mut" data-k="fees.13">Tell us your child's grade and which subjects they need. Ask us anything.</p></li>
+<li><h3 class="d3" data-k="fees.14">Meet the teachers</h3><p class="mut" data-k="fees.15">We check where your child is in each subject and place them in the right batch.</p></li>
+<li><h3 class="d3" data-k="fees.16">Start classes</h3><p class="mut" data-k="fees.17">Pay admission and the first month's fees. Your child gets a timetable and study material.</p></li>
 </ol>
 </div>
 </section>
@@ -832,16 +849,16 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <section class="sec" id="contact">
 <div class="wrap two">
 <div class="info">
-<h2 class="d2">Visit us and see a class</h2>
-<p class="lead mut">Bring your child to a class. The trial class is free, and you can ask the teachers anything.</p>
+<h2 class="d2" data-k="fees.18">Visit us and see a class</h2>
+<p class="lead mut" data-k="fees.19">Bring your child to a class. The trial class is free, and you can ask the teachers anything.</p>
 <a class="btn btn-board" target="_blank" rel="noopener" href="https://wa.me/YOURNUMBER?text=Hello%20Seekers%2C%20I%20would%20like%20to%20try%20a%20free%20class."><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"></path></svg>Message us on WhatsApp</a>
 <div class="facts">
-<p><span class="fill">[YOUR PHONE / WHATSAPP NUMBER]</span></p>
-<p>House 145, Road 3, Block A, Niketon, Gulshan - 1</p>
+<p><span class="fill" data-k="fees.20">[YOUR PHONE / WHATSAPP NUMBER]</span></p>
+<p data-k="fees.21">House 145, Road 3, Block A, Niketon, Gulshan - 1</p>
 </div>
 </div>
 <form class="formcard" style="background:#E0EBE1" id="call-form" novalidate="">
-<h3 class="d3">Or ask for a call back</h3>
+<h3 class="d3" data-k="fees.22">Or ask for a call back</h3>
 <div class="field"><label for="parent-name">Parent's name</label><input id="parent-name" type="text" autocomplete="name"></div>
 <div class="field"><label for="parent-phone">Phone number</label><input id="parent-phone" type="tel" autocomplete="tel" inputmode="tel"></div>
 <div class="field"><label for="child-grade">Your child's grade</label>
@@ -858,9 +875,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
 <div class="wrap">
 <div class="foot-top" style="padding-top:clamp(48px,6vw,80px)">
 <nav aria-label="Footer"><a href="#home" data-go="home">Home</a><a href="#curriculum" data-go="curriculum">Curriculum</a><a href="#facilities" data-go="facilities">Facilities</a><a href="#fees" data-go="fees">Fees and joining</a></nav>
-<p class="mut">Teaching Grade 4 to O Level. © 2026 Seekers</p>
+<p class="mut" data-k="fees.23">Teaching Grade 4 to O Level. © 2026 Seekers</p>
 </div>
-<p class="mark" aria-hidden="true">Seekers</p>
+<p class="mark" aria-hidden="true" data-k="fees.24">Seekers</p>
 </div>
 </footer>
 
@@ -873,6 +890,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
   var TITLES = {"home": "Seekers", "curriculum": "Curriculum | Seekers", "facilities": "Facilities | Seekers", "fees": "Fees and joining | Seekers"};
   var ALIAS = { contact: 'fees' };
   var current = null;
+  var WA = 'YOURNUMBER';
+  var FEES = { admission: 10000, perSubject: 4000, max: 10 };
 
   function el(id) { return document.getElementById(id); }
 
@@ -933,7 +952,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
         ? 'Hello Seekers, my child is studying for O Level. Can we try a free class?'
         : 'Hello Seekers, my child is in Grade ' + LABELS[sel] + '. Can we try a free class?';
     }
-    dialLinks.forEach(function (a) { a.href = 'https://wa.me/YOURNUMBER?text=' + encodeURIComponent(text); });
+    dialLinks.forEach(function (a) { a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); });
   }
   dialBtns.forEach(function (b) {
     b.addEventListener('click', function () {
@@ -950,14 +969,13 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
   function calcRender() {
     el('calc-count').textContent = String(n);
     el('calc-word').textContent = n === 1 ? 'subject' : 'subjects';
-    el('calc-first').textContent = fmt(10000 + 4000 * n);
-    el('calc-monthly').textContent = fmt(4000 * n);
+    el('calc-first').textContent = fmt(FEES.admission + FEES.perSubject * n);
+    el('calc-monthly').textContent = fmt(FEES.perSubject * n);
   }
   el('calc-minus').addEventListener('click', function () { n = Math.max(1, n - 1); calcRender(); });
-  el('calc-plus').addEventListener('click', function () { n = Math.min(10, n + 1); calcRender(); });
+  el('calc-plus').addEventListener('click', function () { n = Math.min(FEES.max, n + 1); calcRender(); });
 
   /* ---- Fees: call-back form (not connected to anything yet) ---- */
-  var WA_NUMBER = 'YOURNUMBER';
   function sent(e) {
     e.preventDefault();
     var name = el('parent-name').value.trim();
@@ -968,7 +986,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
       "Parent's name: " + name + '\n' +
       'Phone: ' + phone + '\n' +
       "Child's grade: " + el('child-grade').value;
-    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+    var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
     var opened = null;
     try { opened = window.open(url, '_blank', 'noopener'); } catch (err) {}
     note.textContent = '';
@@ -982,6 +1000,67 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 var(--
   el('call-form').addEventListener('submit', sent);
   // Some preview panels block form submission entirely, so the button also answers on its own click.
   el('call-form').querySelector('button[type=submit]').addEventListener('click', sent);
+
+  /* ---- Content saved by the admin panel (content.json) ---- */
+  function setText(node, v) { if (node && node.textContent !== v) node.textContent = v; }
+  function applyContent(c) {
+    c = c || {};
+    var T = c.text || {}, I = c.images || {}, F = c.fees || {}, K = c.contact || {};
+    [].forEach.call(document.querySelectorAll('[data-k]'), function (n) {
+      if (n.getAttribute('data-orig') === null) {
+        n.setAttribute('data-orig', n.textContent);
+        if (n.classList.contains('fill')) n.setAttribute('data-wasfill', '1');
+      }
+      var k = n.getAttribute('data-k');
+      var has = Object.prototype.hasOwnProperty.call(T, k);
+      setText(n, has ? T[k] : n.getAttribute('data-orig'));
+      if (n.getAttribute('data-wasfill')) n.classList.toggle('fill', !has || /^\s*\[/.test(T[k]));
+    });
+    [].forEach.call(document.querySelectorAll('[data-img]'), function (s) {
+      if (s.getAttribute('data-ph') === null) s.setAttribute('data-ph', s.textContent);
+      var src = I[s.getAttribute('data-img')];
+      s.textContent = '';
+      if (src) {
+        var im = document.createElement('img');
+        im.src = src; im.alt = ''; im.loading = 'lazy';
+        s.appendChild(im); s.classList.add('has-img');
+      } else {
+        s.textContent = s.getAttribute('data-ph'); s.classList.remove('has-img');
+      }
+    });
+    FEES = { admission: +F.admission > 0 ? +F.admission : 10000, perSubject: +F.perSubject > 0 ? +F.perSubject : 4000, max: 10 };
+    setText(el('fee-admission'), fmt(FEES.admission));
+    setText(el('fee-subject'), fmt(FEES.perSubject));
+    calcRender();
+    WA = /^\d{8,15}$/.test(K.wa || '') ? K.wa : 'YOURNUMBER';
+    [].forEach.call(document.querySelectorAll('a[href*="wa.me/"]'), function (a) {
+      a.setAttribute('href', a.getAttribute('href').replace(/wa\.me\/[^?]*/, 'wa.me/' + WA));
+    });
+    dialRender();
+    var box = el('notices'), today = new Date(); 
+    var ymd = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    box.textContent = '';
+    (c.announcements || []).forEach(function (a) {
+      if (!a || !a.text || (a.until && a.until < ymd)) return;
+      var p = document.createElement('p'); p.textContent = a.text; box.appendChild(p);
+    });
+    box.hidden = !box.firstChild;
+    var grid = el('gallery-grid'), gal = c.gallery || [];
+    grid.textContent = '';
+    gal.forEach(function (g) {
+      if (!g || !g.src) return;
+      var f = document.createElement('figure'), im = document.createElement('img');
+      im.src = g.src; im.alt = g.caption || ''; im.loading = 'lazy'; f.appendChild(im);
+      if (g.caption) { var cap = document.createElement('figcaption'); cap.textContent = g.caption; f.appendChild(cap); }
+      grid.appendChild(f);
+    });
+    el('gallery').hidden = !grid.firstChild && !window.__seekersEditing;
+  }
+  window.__seekers = { apply: applyContent };
+  try {
+    fetch('content.json?v=' + Date.now()).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && !window.__seekersEditing) applyContent(j); }).catch(function () {});
+  } catch (err) { /* opened as a plain file: nothing to load */ }
 })();
 </script>
 </body>

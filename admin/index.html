@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#11463A">
+<title>Seekers admin</title>
+<style>
+:root{--bg:#F3F6F2;--card:#FFFFFF;--ink:#0F1E19;--mut:#5A6B63;--line:#D5DFD6;--green:#11463A;--lime:#D5F25B;--danger:#B3261E;--ok:#1C7A4F;--focus:#2F7BEA;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0C1713;--card:#142520;--ink:#EEF4EF;--mut:#9DB3A8;--line:#27403A;--green:#D5F25B;--lime:#D5F25B;--danger:#FF8A80;--ok:#7BE0A8;color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+[hidden]{display:none!important}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1,h2,h3{margin:0;line-height:1.2}
+.mut{color:var(--mut)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* buttons */
+.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:700;background:var(--green);color:#fff;transition:transform .12s ease-out,opacity .12s}
+@media (prefers-color-scheme:dark){.btn{color:#0C1713}}
+.btn:active{transform:scale(.97)}
+.btn[disabled]{opacity:.45;cursor:default;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{padding:7px 12px;font-size:14px}
+.btn.danger{background:transparent;color:var(--danger);border:1.5px solid var(--line)}
+
+/* login */
+#login{min-height:100dvh;display:grid;place-items:center;padding:24px 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;width:100%;max-width:480px}
+.card h1{font-size:28px;margin-bottom:6px}
+label{display:block;font-weight:700;margin:18px 0 6px}
+input[type=text],input[type=password],input[type=number],input[type=date]{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+.hint{font-size:14px;color:var(--mut);margin:6px 0 0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.check{display:flex;gap:10px;align-items:center;font-weight:500;margin-top:14px}
+.err{color:var(--danger);font-weight:600;margin-top:14px;min-height:1.4em}
+details.help{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+details.help summary{font-weight:700;cursor:pointer}
+details.help ol{padding-left:20px;margin:10px 0 0}
+details.help li{margin:6px 0}
+code{background:var(--bg);padding:1px 6px;border-radius:5px;font-size:.92em}
+
+/* app shell */
+.top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap;padding-block:8px}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.01em}
+.sp{flex:1}
+.pill{font-size:13px;color:var(--mut)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:6px;vertical-align:1px}
+.dot.on{background:#E5A000}
+.tabs{display:flex;gap:4px;overflow-x:auto}
+.tab{border:0;background:transparent;padding:12px 14px;font-weight:700;color:var(--mut);border-bottom:3px solid transparent;white-space:nowrap}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--green)}
+@media (prefers-color-scheme:dark){.tab[aria-selected=true]{border-bottom-color:var(--lime)}}
+main{padding-block:22px 80px}
+.panel h2{font-size:24px;margin-bottom:6px}
+.panel>.mut{margin:0 0 20px}
+.field{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;max-width:420px}
+.list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:10px}
+.item .row>*{min-width:0}
+.item input[type=text]{flex:1 1 220px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:16px}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.gcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bg)}
+.gcard .b{padding:10px;display:grid;gap:8px}
+.empty{padding:26px;border:1.5px dashed var(--line);border-radius:12px;text-align:center;color:var(--mut)}
+
+/* page editor */
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:7px 15px;font-weight:700;font-size:15px}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+@media (prefers-color-scheme:dark){.chip[aria-pressed=true]{color:#0C1713}}
+.tip{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;margin-bottom:14px}
+.tip b{background:var(--lime);color:#0F1E19;padding:0 6px;border-radius:4px}
+.stage{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;margin-inline:auto;transition:max-width .2s ease-out}
+.stage iframe{display:block;width:100%;height:calc(100dvh - 230px);min-height:480px;border:0;background:#fff}
+.stage.phone{max-width:390px}
+
+#toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;max-width:min(92vw,520px);opacity:0;pointer-events:none;transition:opacity .18s ease-out,transform .18s ease-out;z-index:50}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast.bad{background:var(--danger);color:#fff}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<section id="login">
+  <form class="card" id="login-form" autocomplete="off" novalidate>
+    <h1>Seekers admin</h1>
+    <p class="mut" style="margin:0">Sign in to change the website's pictures, text, fees and news.</p>
+    <label for="repo">Website repository</label>
+    <input type="text" id="repo" placeholder="your-github-name/your-repository" autocapitalize="none" autocorrect="off" spellcheck="false">
+    <p class="hint">Your GitHub username, a slash, then the repository name. Example: <code>seekers-bd/seekers-site</code></p>
+    <label for="token">Access token (your password)</label>
+    <input type="password" id="token" placeholder="github_pat_..." autocapitalize="none" autocorrect="off" spellcheck="false">
+    <label class="check"><input type="checkbox" id="remember"> Remember me on this device</label>
+    <p class="err" id="login-err" role="alert"></p>
+    <button class="btn" type="submit" id="login-btn">Sign in</button>
+    <details class="help">
+      <summary>How do I get an access token?</summary>
+      <ol>
+        <li>Sign in to GitHub, click your picture, then <b>Settings</b>.</li>
+        <li>Scroll down the left side to <b>Developer settings</b>, then <b>Personal access tokens</b>, then <b>Fine-grained tokens</b>.</li>
+        <li>Press <b>Generate new token</b>. Name it <code>Seekers admin</code> and set the longest expiry offered.</li>
+        <li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick your website repository.</li>
+        <li>Under <b>Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>.</li>
+        <li>Press <b>Generate token</b> and copy it. GitHub shows it only once, so save it somewhere private.</li>
+      </ol>
+      <p class="hint">The token works only for this one repository. Anyone who has it can change your site, so do not share it.</p>
+    </details>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <span class="brand">Seekers admin</span>
+      <span class="pill" id="repo-pill"></span>
+      <span class="sp"></span>
+      <span class="pill"><span class="dot" id="dirty-dot"></span><span id="dirty-text">No changes</span></span>
+      <button class="btn" id="publish" disabled>Publish changes</button>
+      <button class="btn ghost small" id="logout">Sign out</button>
+    </div>
+    <div class="wrap"><div class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" data-tab="pages" aria-selected="true">Pages</button>
+      <button class="tab" role="tab" data-tab="fees" aria-selected="false">Fees and contact</button>
+      <button class="tab" role="tab" data-tab="news" aria-selected="false">News</button>
+      <button class="tab" role="tab" data-tab="gallery" aria-selected="false">Gallery</button>
+    </div></div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" id="tab-pages">
+      <div class="bar" id="chips"></div>
+      <div class="tip">Click any <b>text</b> on the page to change it. Click a grey <b>photo box</b> to add a picture, and click it again to replace it. Nothing goes live until you press <b>Publish changes</b>.</div>
+      <div class="bar"><button class="chip" id="phone" aria-pressed="false">Phone width</button></div>
+      <div class="stage" id="stage"><iframe id="frame" title="Website preview"></iframe></div>
+    </section>
+
+    <section class="panel" id="tab-fees" hidden>
+      <h2>Fees and contact</h2>
+      <p class="mut">These numbers feed the fee calculator and every WhatsApp button on the site.</p>
+      <div class="field"><label for="f-adm" style="margin-top:0">Admission fee, paid once (BDT)</label><input type="number" id="f-adm" inputmode="numeric" min="0" step="100"></div>
+      <div class="field"><label for="f-sub">Fee per subject, every month (BDT)</label><input type="number" id="f-sub" inputmode="numeric" min="0" step="100"></div>
+      <div class="field"><label for="f-wa">WhatsApp number</label><input type="text" id="f-wa" inputmode="numeric" placeholder="8801712345678"><p class="hint">Country code first, digits only, no plus sign or spaces. Bangladesh numbers start with 880.</p><p class="err" id="wa-err"></p></div>
+      <p class="hint" style="margin-top:18px">The address and phone line on the Fees page are plain text. Change them under <b>Pages</b>.</p>
+    </section>
+
+    <section class="panel" id="tab-news" hidden>
+      <h2>News</h2>
+      <p class="mut">A green notice bar appears at the top of every page. Add one for a new batch, a holiday or a result.</p>
+      <button class="btn" id="add-news">Add a notice</button>
+      <div class="list" id="news-list"></div>
+    </section>
+
+    <section class="panel" id="tab-gallery" hidden>
+      <h2>Gallery</h2>
+      <p class="mut">Photos appear in a grid at the bottom of the Facilities page. Pictures are resized automatically.</p>
+      <button class="btn" id="add-photos">Add pictures</button>
+      <div class="gallery" id="gal-list"></div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="picker" accept="image/*" hidden>
+<input type="file" id="gpicker" accept="image/*" multiple hidden>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = 'seekers-admin';
+  var S = { repo: '', token: '', branch: 'main', draft: null, saved: null, dirty: false };
+  var empty = function () { return { text: {}, images: {}, fees: {}, contact: {}, announcements: [], gallery: [] }; };
+
+  /* ---------- small helpers ---------- */
+  var toastTimer;
+  function toast(msg, bad) {
+    var t = $('toast'); t.textContent = msg; t.className = 'show' + (bad ? ' bad' : '');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.className = ''; }, bad ? 7000 : 3500);
+  }
+  function setDirty(v) {
+    S.dirty = v;
+    $('dirty-dot').className = 'dot' + (v ? ' on' : '');
+    $('dirty-text').textContent = v ? 'Unpublished changes' : 'No changes';
+    $('publish').disabled = !v;
+  }
+  window.addEventListener('beforeunload', function (e) { if (S.dirty) { e.preventDefault(); e.returnValue = ''; } });
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+  /* ---------- GitHub ---------- */
+  function gh(path, opt) {
+    opt = opt || {};
+    return fetch('https://api.github.com' + path, {
+      method: opt.method || 'GET',
+      headers: { 'Authorization': 'Bearer ' + S.token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' },
+      body: opt.body ? JSON.stringify(opt.body) : undefined
+    });
+  }
+  function b64utf8(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function fromB64utf8(b64) {
+    var bin = atob(b64.replace(/\s/g, '')), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+  async function readContent() {
+    var r = await gh('/repos/' + S.repo + '/contents/content.json?ref=' + encodeURIComponent(S.branch));
+    if (r.status === 404) return { content: empty(), sha: null };
+    if (!r.ok) throw new Error('Could not read the site content (' + r.status + ').');
+    var j = await r.json();
+    var c = Object.assign(empty(), JSON.parse(fromB64utf8(j.content)));
+    return { content: c, sha: j.sha };
+  }
+  async function putFile(path, b64, message, sha) {
+    var body = { message: message, content: b64, branch: S.branch };
+    if (sha) body.sha = sha;
+    var r = await gh('/repos/' + S.repo + '/contents/' + path.split('/').map(encodeURIComponent).join('/'), { method: 'PUT', body: body });
+    if (!r.ok) {
+      var m = ''; try { m = (await r.json()).message; } catch (e) {}
+      var err = new Error(m || ('GitHub said no (' + r.status + ').')); err.status = r.status; throw err;
+    }
+    return r.json();
+  }
+
+  /* ---------- login ---------- */
+  function loginError(msg) { $('login-err').textContent = msg; $('login-btn').disabled = false; $('login-btn').textContent = 'Sign in'; }
+
+  async function signIn(repo, token, remember) {
+    S.repo = repo; S.token = token;
+    var r;
+    try { r = await gh('/repos/' + repo); } catch (e) { throw new Error('Could not reach GitHub. Check your internet and try again.'); }
+    if (r.status === 401) throw new Error('GitHub did not accept that token. Check you copied all of it.');
+    if (r.status === 404) throw new Error('Repository not found, or the token does not cover it. Check the name and the token’s repository access.');
+    if (!r.ok) throw new Error('GitHub answered with an error (' + r.status + ').');
+    var info = await r.json();
+    if (info.permissions && !info.permissions.push) throw new Error('This token can read the repository but not change it. Set Contents to Read and write.');
+    S.branch = info.default_branch || 'main';
+    var got = await readContent();
+    S.saved = got.content; S.draft = clone(got.content);
+    try {
+      if (remember) localStorage.setItem(KEY, JSON.stringify({ repo: repo, token: token }));
+      else localStorage.setItem(KEY, JSON.stringify({ repo: repo }));
+    } catch (e) {}
+    $('repo-pill').textContent = repo;
+    $('login').hidden = true; $('app').hidden = false;
+    renderAll(); loadFrame();
+  }
+
+  $('login-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var repo = $('repo').value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$/, '').replace(/\/$/, '');
+    var token = $('token').value.trim();
+    if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) return loginError('Write the repository as your-github-name/repository-name.');
+    if (!token) return loginError('Paste your access token.');
+    $('login-err').textContent = ''; $('login-btn').disabled = true; $('login-btn').textContent = 'Signing in…';
+    try { await signIn(repo, token, $('remember').checked); } catch (err) { loginError(err.message); }
+  });
+
+  $('logout').addEventListener('click', function () {
+    if (S.dirty && !confirm('You have unpublished changes. Sign out anyway?')) return;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    S.dirty = false; location.reload();
+  });
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) { $('repo').value = saved.repo || ''; if (saved.token) { $('token').value = saved.token; $('remember').checked = true; } }
+  } catch (e) {}
+
+  /* ---------- tabs ---------- */
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      ['pages', 'fees', 'news', 'gallery'].forEach(function (n) { $('tab-' + n).hidden = (n !== t.getAttribute('data-tab')); });
+    });
+  });
+
+  /* ---------- page editor (the real site, made editable) ---------- */
+  var frame = $('frame'), PAGES = [['home', 'Home'], ['curriculum', 'Curriculum'], ['facilities', 'Facilities'], ['fees', 'Fees and joining']];
+  var pickTarget = null;
+
+  PAGES.forEach(function (p) {
+    var b = document.createElement('button'); b.className = 'chip'; b.textContent = p[1]; b.setAttribute('data-p', p[0]); b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () { goPage(p[0]); });
+    $('chips').appendChild(b);
+  });
+  function goPage(name) {
+    var d = frame.contentDocument; if (!d) return;
+    var a = d.querySelector('[data-go="' + name + '"]'); if (a) a.click();
+    markChip();
+  }
+  function markChip() {
+    var d = frame.contentDocument; if (!d) return;
+    PAGES.forEach(function (p) {
+      var v = d.getElementById('view-' + p[0]);
+      var on = v && !v.hidden;
+      $('chips').querySelector('[data-p="' + p[0] + '"]').setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  $('phone').addEventListener('click', function () {
+    var on = this.getAttribute('aria-pressed') !== 'true';
+    this.setAttribute('aria-pressed', on ? 'true' : 'false'); $('stage').classList.toggle('phone', on);
+  });
+
+  function loadFrame() {
+    frame.onload = arm;
+    frame.src = '../index.html?edit=' + Date.now();
+  }
+
+  function norm(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
+
+  function collectText() {
+    var d = frame.contentDocument; if (!d) return;
+    var T = {};
+    [].forEach.call(d.querySelectorAll('[data-k]'), function (n) {
+      var orig = n.getAttribute('data-orig');
+      if (orig === null) return;
+      if (norm(n.textContent) !== norm(orig)) T[n.getAttribute('data-k')] = norm(n.textContent);
+    });
+    S.draft.text = T;
+  }
+
+  function preview() {
+    collectText();
+    try { frame.contentWindow.__seekers.apply(S.draft); } catch (e) {}
+    decorate();
+  }
+
+  function decorate() {
+    var d = frame.contentDocument; if (!d) return;
+    [].forEach.call(d.querySelectorAll('[data-img]'), function (s) {
+      if (s.classList.contains('has-img') && !s.querySelector('.adm-x')) {
+        var x = d.createElement('button'); x.className = 'adm-x'; x.type = 'button'; x.textContent = 'Remove picture';
+        s.style.position = 'relative'; s.appendChild(x);
+      }
+    });
+  }
+
+  function arm() {
+    var w = frame.contentWindow, d = frame.contentDocument;
+    if (!w || !w.__seekers) { toast('The site preview did not load. Is index.html next to the admin folder?', true); return; }
+    w.__seekersEditing = true;
+    var st = d.createElement('style');
+    st.textContent =
+      '[data-k]{outline:2px dashed transparent;outline-offset:3px;border-radius:4px;transition:outline-color .12s}' +
+      '[data-k]:hover{outline-color:rgba(47,123,234,.55)}[data-k]:focus{outline:2px solid #2F7BEA;cursor:text}' +
+      '[data-img]{cursor:pointer;outline:2px dashed transparent;outline-offset:-6px}[data-img]:hover{outline-color:#2F7BEA}' +
+      '.adm-x{position:absolute;right:12px;top:12px;border:0;border-radius:8px;background:#B3261E;color:#fff;font:700 14px system-ui;padding:8px 12px;cursor:pointer}' +
+      '#gallery[hidden]{display:block!important;opacity:.55}#gallery-grid:empty::before{content:"Pictures you add in the Gallery tab show here.";display:block;padding:24px;border:2px dashed #9DB3A8;border-radius:12px}' +
+      '.rise{animation:none!important}';
+    d.head.appendChild(st);
+    w.__seekers.apply(S.draft);
+    [].forEach.call(d.querySelectorAll('[data-k]'), function (n) {
+      n.contentEditable = 'plaintext-only';
+      if (n.contentEditable !== 'plaintext-only') n.contentEditable = 'true';
+      n.spellcheck = false;
+      n.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); n.blur(); } });
+      n.addEventListener('paste', function (e) {
+        e.preventDefault(); var t = (e.clipboardData || w.clipboardData).getData('text'); d.execCommand('insertText', false, t.replace(/\s+/g, ' '));
+      });
+    });
+    d.addEventListener('input', function (e) { if (e.target.closest && e.target.closest('[data-k]')) setDirty(true); });
+    d.addEventListener('click', function (e) {
+      var x = e.target.closest('.adm-x');
+      if (x) { e.preventDefault(); e.stopPropagation(); delete S.draft.images[x.parentNode.getAttribute('data-img')]; setDirty(true); preview(); return; }
+      var slot = e.target.closest('[data-img]');
+      if (slot) { e.preventDefault(); e.stopPropagation(); pickTarget = slot.getAttribute('data-img'); $('picker').value = ''; $('picker').click(); return; }
+      var a = e.target.closest('a');
+      if (a && !a.hasAttribute('data-go')) e.preventDefault();
+      setTimeout(markChip, 0);
+    }, true);
+    d.addEventListener('submit', function (e) { e.preventDefault(); }, true);
+    decorate(); markChip();
+  }
+
+  /* ---------- pictures ---------- */
+  function shrink(file, max) {
+    return new Promise(function (res, rej) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var s = Math.min(1, max / Math.max(img.width, img.height));
+        var c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('That file is not a picture this browser can read. Try a JPG or PNG.')); };
+      img.src = url;
+    });
+  }
+
+  $('picker').addEventListener('change', async function () {
+    var f = this.files && this.files[0]; if (!f || !pickTarget) return;
+    try { S.draft.images[pickTarget] = await shrink(f, 1600); setDirty(true); preview(); }
+    catch (e) { toast(e.message, true); }
+  });
+
+  /* ---------- fees and contact ---------- */
+  function renderFees() {
+    var F = S.draft.fees || {}, K = S.draft.contact || {};
+    $('f-adm').value = F.admission || 10000; $('f-sub').value = F.perSubject || 4000; $('f-wa').value = K.wa || '';
+  }
+  function feesChanged() {
+    S.draft.fees = { admission: Math.max(0, +$('f-adm').value || 0), perSubject: Math.max(0, +$('f-sub').value || 0) };
+    var wa = $('f-wa').value.replace(/[\s+\-()]/g, '');
+    $('wa-err').textContent = wa && !/^\d{8,15}$/.test(wa) ? 'Digits only, with the country code, for example 8801712345678.' : '';
+    S.draft.contact = { wa: /^\d{8,15}$/.test(wa) ? wa : '' };
+    setDirty(true); preview();
+  }
+  ['f-adm', 'f-sub', 'f-wa'].forEach(function (id) { $(id).addEventListener('input', feesChanged); });
+
+  /* ---------- news ---------- */
+  function renderNews() {
+    var box = $('news-list'); box.textContent = '';
+    var list = S.draft.announcements;
+    if (!list.length) { var e = document.createElement('div'); e.className = 'empty'; e.textContent = 'No notices yet. The site shows no notice bar.'; box.appendChild(e); return; }
+    list.forEach(function (a, i) {
+      var it = document.createElement('div'); it.className = 'item';
+      var r1 = document.createElement('div'); r1.className = 'row';
+      var t = document.createElement('input'); t.type = 'text'; t.value = a.text || ''; t.placeholder = 'Example: New Grade 9 batch starts 1 December'; t.setAttribute('aria-label', 'Notice text'); t.maxLength = 200;
+      t.addEventListener('input', function () { a.text = t.value; setDirty(true); preview(); });
+      r1.appendChild(t); it.appendChild(r1);
+      var r2 = document.createElement('div'); r2.className = 'row';
+      var l = document.createElement('label'); l.style.margin = '0'; l.style.fontWeight = '600'; l.textContent = 'Hide after'; l.htmlFor = 'nd' + i;
+      var d = document.createElement('input'); d.type = 'date'; d.id = 'nd' + i; d.value = a.until || ''; d.style.width = 'auto';
+      d.addEventListener('input', function () { a.until = d.value; setDirty(true); preview(); });
+      var rm = document.createElement('button'); rm.className = 'btn danger small'; rm.textContent = 'Delete';
+      rm.addEventListener('click', function () { list.splice(i, 1); setDirty(true); renderNews(); preview(); });
+      var h = document.createElement('span'); h.className = 'hint'; h.textContent = 'Optional. Leave empty to keep it showing.';
+      r2.appendChild(l); r2.appendChild(d); r2.appendChild(h); var sp = document.createElement('span'); sp.className = 'sp'; r2.appendChild(sp); r2.appendChild(rm);
+      it.appendChild(r2); box.appendChild(it);
+    });
+  }
+  $('add-news').addEventListener('click', function () {
+    S.draft.announcements.push({ text: '', until: '' }); setDirty(true); renderNews();
+    var ins = $('news-list').querySelectorAll('input[type=text]'); if (ins.length) ins[ins.length - 1].focus();
+  });
+
+  /* ---------- gallery ---------- */
+  function renderGallery() {
+    var box = $('gal-list'); box.textContent = '';
+    var g = S.draft.gallery;
+    if (!g.length) { var e = document.createElement('div'); e.className = 'empty'; e.style.gridColumn = '1/-1'; e.textContent = 'No pictures yet.'; box.appendChild(e); return; }
+    g.forEach(function (p, i) {
+      var c = document.createElement('div'); c.className = 'gcard';
+      var im = document.createElement('img'); im.alt = ''; im.src = /^data:/.test(p.src) ? p.src : '../' + p.src;
+      var b = document.createElement('div'); b.className = 'b';
+      var cap = document.createElement('input'); cap.type = 'text'; cap.placeholder = 'Caption (optional)'; cap.value = p.caption || ''; cap.maxLength = 120; cap.setAttribute('aria-label', 'Caption');
+      cap.addEventListener('input', function () { p.caption = cap.value; setDirty(true); preview(); });
+      var r = document.createElement('div'); r.className = 'row';
+      var up = document.createElement('button'); up.className = 'btn ghost small'; up.textContent = '←'; up.setAttribute('aria-label', 'Move earlier'); up.disabled = i === 0;
+      var dn = document.createElement('button'); dn.className = 'btn ghost small'; dn.textContent = '→'; dn.setAttribute('aria-label', 'Move later'); dn.disabled = i === g.length - 1;
+      var rm = document.createElement('button'); rm.className = 'btn danger small'; rm.textContent = 'Delete';
+      up.addEventListener('click', function () { g.splice(i - 1, 0, g.splice(i, 1)[0]); setDirty(true); renderGallery(); preview(); });
+      dn.addEventListener('click', function () { g.splice(i + 1, 0, g.splice(i, 1)[0]); setDirty(true); renderGallery(); preview(); });
+      rm.addEventListener('click', function () { g.splice(i, 1); setDirty(true); renderGallery(); preview(); });
+      r.appendChild(up); r.appendChild(dn); var sp = document.createElement('span'); sp.className = 'sp'; r.appendChild(sp); r.appendChild(rm);
+      b.appendChild(cap); b.appendChild(r); c.appendChild(im); c.appendChild(b); box.appendChild(c);
+    });
+  }
+  $('add-photos').addEventListener('click', function () { $('gpicker').value = ''; $('gpicker').click(); });
+  $('gpicker').addEventListener('change', async function () {
+    var files = [].slice.call(this.files || []); if (!files.length) return;
+    try {
+      for (var i = 0; i < files.length; i++) S.draft.gallery.push({ src: await shrink(files[i], 1600), caption: '' });
+      setDirty(true); renderGallery(); preview();
+    } catch (e) { toast(e.message, true); }
+  });
+
+  function renderAll() { renderFees(); renderNews(); renderGallery(); }
+
+  /* ---------- publish ---------- */
+  var publishing = false;
+  $('publish').addEventListener('click', async function () {
+    if (publishing) return; publishing = true;
+    var btn = this; btn.disabled = true; btn.textContent = 'Publishing…';
+    try {
+      collectText();
+      var out = clone(S.draft), stamp = Date.now(), n = 0;
+      async function upload(dataUrl, tag) {
+        n++; var path = 'uploads/' + tag.replace(/[^\w-]+/g, '-') + '-' + stamp + '-' + n + '.jpg';
+        await putFile(path, dataUrl.split(',')[1], 'Add picture ' + path);
+        return path;
+      }
+      var keys = Object.keys(out.images);
+      for (var i = 0; i < keys.length; i++) if (/^data:/.test(out.images[keys[i]])) out.images[keys[i]] = await upload(out.images[keys[i]], keys[i]);
+      for (var j = 0; j < out.gallery.length; j++) if (/^data:/.test(out.gallery[j].src)) out.gallery[j].src = await upload(out.gallery[j].src, 'gallery');
+      out.announcements = out.announcements.filter(function (a) { return a.text && a.text.trim(); });
+      var body = b64utf8(JSON.stringify(out, null, 2) + '\n');
+      for (var attempt = 0; ; attempt++) {
+        var cur = await readContent();
+        try { await putFile('content.json', body, 'Update website content', cur.sha); break; }
+        catch (e) { if (attempt < 1 && (e.status === 409 || e.status === 422)) continue; throw e; }
+      }
+      S.draft = out; S.saved = clone(out); setDirty(false); renderAll(); preview();
+      toast('Published. The live site updates in about a minute.');
+    } catch (e) {
+      setDirty(true);
+      toast('Could not publish: ' + e.message + ' Your changes are still here. Try again.', true);
+    } finally { publishing = false; btn.textContent = 'Publish changes'; btn.disabled = !S.dirty; }
+  });
+})();
+</script>
+</body>
+</html>
